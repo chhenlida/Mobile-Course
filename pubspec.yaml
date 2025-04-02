@@ -27,3 +27,4 @@ flutter:
   # ✅ Make sure your image file exists in the correct location
   assets:
     - assets/photo.png  
+    - assets/images/accent.png

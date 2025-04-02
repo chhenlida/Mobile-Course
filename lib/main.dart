@@ -1,153 +1,368 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyPortfolioApp());
+  runApp(const MainApp());
 }
 
-class MyPortfolioApp extends StatelessWidget {
-  const MyPortfolioApp({super.key});
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      home: RegisterPage(),
       debugShowCheckedModeBanner: false,
-      home: const PortfolioScreen(),
+      theme: ThemeData(fontFamily: 'Lato'),
     );
   }
 }
 
-class PortfolioScreen extends StatelessWidget {
-  const PortfolioScreen({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  bool termsAccepted = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'AeroVision',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: CircleAvatar(
-            backgroundColor: Colors.blue,
-            child: Icon(Icons.business, color: Colors.white),
-          ),
-        ),
-        actions: [
-          Builder(
-            builder:
-                (context) => IconButton(
-                  icon: const Icon(Icons.menu, color: Colors.black),
-                  onPressed: () {
-                    Scaffold.of(context).openEndDrawer();
+      body: Padding(
+        padding: EdgeInsets.fromLTRB(20, 75, 20, 75),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Register new\naccount',
+              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 24),
+            ),
+            SizedBox(height: 20),
+            Image(image: AssetImage('assets/images/accent.png'), width: 100),
+            SizedBox(height: 50),
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'Email',
+                hintStyle: TextStyle(color: Colors.grey[500]),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  borderSide: BorderSide.none,
+                ),
+                filled: true,
+                fillColor: const Color.fromARGB(36, 81, 80, 82),
+              ),
+            ),
+            SizedBox(height: 30),
+            TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                hintText: 'Password',
+                hintStyle: TextStyle(color: Colors.grey[500]),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  borderSide: BorderSide.none,
+                ),
+                filled: true,
+                fillColor: const Color.fromARGB(36, 81, 80, 82),
+                suffixIcon: Icon(
+                  Icons.visibility_outlined,
+                  color: Colors.grey[500],
+                ),
+              ),
+            ),
+            SizedBox(height: 30),
+            TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                hintText: 'Password Confirmation',
+                hintStyle: TextStyle(color: Colors.grey[500]),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  borderSide: BorderSide.none,
+                ),
+                filled: true,
+                fillColor: const Color.fromARGB(36, 81, 80, 82),
+                suffixIcon: Icon(
+                  Icons.visibility_outlined,
+                  color: Colors.grey[500],
+                ),
+              ),
+            ),
+            SizedBox(height: 30),
+            Row(
+              children: [
+                Checkbox(
+                  side: BorderSide(color: Colors.grey),
+                  value: termsAccepted,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      termsAccepted = value!;
+                    });
                   },
                 ),
-          ),
-        ],
-      ),
-      endDrawer: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.3,
-        child: Drawer(
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              bottomLeft: Radius.circular(20),
-            ),
-          ),
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              DrawerHeader(
-                decoration: BoxDecoration(color: Colors.blue),
-                child: Center(
-                  child: Text(
-                    'Menu',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                RichText(
+                  text: TextSpan(
+                    style: TextStyle(fontSize: 14, color: Colors.grey),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: "By creating an account, you agree to our\n",
+                      ),
+                      TextSpan(
+                        text: 'Terms & Conditions',
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-              ListTile(title: Text('Home'), onTap: () {}),
-              ListTile(title: Text('Services'), onTap: () {}),
-              ListTile(title: Text('About'), onTap: () {}),
-              ListTile(title: Text('Works'), onTap: () {}),
-              ListTile(title: Text('Contact'), onTap: () {}),
-            ],
-          ),
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const CircleAvatar(
-              radius: 60,
-              backgroundImage: AssetImage('assets/photo.png'),
+              ],
             ),
-            const SizedBox(height: 10),
-            const Text(
-              'Welcome to my Portfolio',
-              style: TextStyle(fontSize: 16, color: Colors.grey),
-            ),
-            const SizedBox(height: 10),
-            RichText(
-              textAlign: TextAlign.center,
-              text: const TextSpan(
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-                children: [
-                  TextSpan(text: 'Hi I’m '),
-                  TextSpan(
-                    text: 'Lida in GIC student\n',
-                    style: TextStyle(color: Colors.blue),
+            SizedBox(height: 30),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  padding: EdgeInsets.symmetric(vertical: 15),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
                   ),
-                  TextSpan(text: ' UX/UI Designer'),
-                ],
-              ),
-            ),
-            const SizedBox(height: 10),
-            const Text(
-              'Collaborating with highly skilled individuals, our agency delivers top-quality services.',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14, color: Colors.grey),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
                 ),
-                minimumSize: const Size(double.infinity, 50),
-              ),
-              child: const Text(
-                'Hire Me!',
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const DashboardPage(),
+                    ),
+                  );
+                },
+                child: Text('Register', style: TextStyle(color: Colors.white)),
               ),
             ),
-            const SizedBox(height: 10),
-            OutlinedButton(
-              onPressed: () {},
-              style: OutlinedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+            SizedBox(height: 90),
+            Center(
+              child: RichText(
+                text: TextSpan(
+                  style: TextStyle(fontSize: 14, color: Colors.black),
+                  children: <TextSpan>[
+                    TextSpan(text: "Already have an account?"),
+                    TextSpan(
+                      text: ' Log in',
+                      style: TextStyle(color: Colors.blue),
+                      recognizer:
+                          TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.pop(context);
+                            },
+                    ),
+                  ],
                 ),
-                side: const BorderSide(color: Colors.blue),
-                minimumSize: const Size(double.infinity, 50),
-              ),
-              child: const Text(
-                'Download CV',
-                style: TextStyle(color: Colors.blue, fontSize: 18),
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  bool rememberMe = false;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+        padding: EdgeInsets.fromLTRB(20, 75, 20, 75),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Login to your\naccount',
+              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 24),
+            ),
+            SizedBox(height: 20),
+            Image(image: AssetImage('assets/images/accent.png'), width: 100),
+            SizedBox(height: 50),
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'Email',
+                hintStyle: TextStyle(color: Colors.grey[500]),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  borderSide: BorderSide.none,
+                ),
+                filled: true,
+                fillColor: const Color.fromARGB(36, 81, 80, 82),
+              ),
+            ),
+            SizedBox(height: 30),
+            TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                hintText: 'Password',
+                hintStyle: TextStyle(color: Colors.grey[500]),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  borderSide: BorderSide.none,
+                ),
+                filled: true,
+                fillColor: const Color.fromARGB(36, 81, 80, 82),
+                suffixIcon: Icon(
+                  Icons.visibility_outlined,
+                  color: Colors.grey[500],
+                ),
+              ),
+            ),
+            SizedBox(height: 30),
+            Row(
+              children: [
+                Checkbox(
+                  side: BorderSide(color: Colors.grey),
+                  value: rememberMe,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      rememberMe = value!;
+                    });
+                  },
+                ),
+                Text('Remember me'),
+              ],
+            ),
+            SizedBox(height: 30),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 14, 140, 243),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  padding: EdgeInsets.symmetric(vertical: 15),
+                ),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const DashboardPage(),
+                    ),
+                  );
+                },
+                child: Text(
+                  'Login',
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            Center(
+              child: Text(
+                'OR',
+                style: TextStyle(color: Colors.grey, fontSize: 16),
+              ),
+            ),
+            SizedBox(height: 20),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 225, 225, 227),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  padding: EdgeInsets.symmetric(vertical: 15),
+                ),
+                onPressed: () {},
+                child: Text(
+                  'Login with Google',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 90),
+            Center(
+              child: RichText(
+                text: TextSpan(
+                  style: TextStyle(fontSize: 14, color: Colors.black),
+                  children: <TextSpan>[
+                    TextSpan(text: "Don't have an account?"),
+                    TextSpan(
+                      text: ' Register',
+                      style: TextStyle(color: Colors.blue),
+                      recognizer:
+                          TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const RegisterPage(),
+                                ),
+                              );
+                            },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DashboardPage extends StatefulWidget {
+  const DashboardPage({super.key});
+
+  @override
+  State<DashboardPage> createState() => _DashboardPageState();
+}
+
+class _DashboardPageState extends State<DashboardPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(80.0),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Hello Milylyn, Welcome!',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+              ),
+              SizedBox(height: 20),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    padding: EdgeInsets.symmetric(vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const LoginPage(),
+                      ),
+                    );
+                  },
+                  child: Text('Log Out', style: TextStyle(color: Colors.white)),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
