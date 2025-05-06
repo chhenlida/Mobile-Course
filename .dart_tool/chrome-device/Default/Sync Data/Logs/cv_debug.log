@@ -1,0 +1,1 @@
+{"logTime": "0506/065454", "correlationVector":"KsjmB+98VnLhidPUklOpYo","action":"SyncServerConnectionManagerRequest", "result":"CONNECTION_UNAVAILABLE", "context":{"error_type":"net_error_code", "error_value":"-105"}}
