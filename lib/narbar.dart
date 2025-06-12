@@ -11,19 +11,12 @@ class CustomNavBar extends StatefulWidget {
 class _CustomNavBarState extends State<CustomNavBar> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _page = [
-    Center(
-      child: Text("My Course Screen"),
-    ),
-
-    Center(
-      child: Text("Online Course Screen"),
-    ),
-    ExplorePage(),
-    Center(
-      child: Text("Category Screen"),
-    )
-  ];
+ final List<Widget> _pages = [
+  Center(child: Text("My Course Screen")),
+  Center(child: Text("Online Course Screen")),
+  ExplorePage(),
+  Center(child: Text("Category Screen")),
+];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -34,7 +27,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _selectedIndex == 0 ? _buildMainContent() : _page[_selectedIndex],
+      body: _selectedIndex == 0 ? _buildMainContent() : _pages[_selectedIndex],
       bottomNavigationBar: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18),

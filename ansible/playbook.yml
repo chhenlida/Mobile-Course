@@ -1,0 +1,6 @@
+- name: Ping server1-i4d
+  remote_user: root
+  hosts: myservers
+  tasks:
+    - name: Ping the server
+      ping:
