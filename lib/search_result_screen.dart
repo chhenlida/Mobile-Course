@@ -325,7 +325,7 @@ class _CourseCardState extends State<CourseCard> {
                       const SizedBox(width: 12),
                       const Icon(Icons.remove_red_eye, size: 14, color: Colors.grey),
                       const SizedBox(width: 4),
-                      const Text('99 នាក់មើលរួច', style: TextStyle(fontSize: 12)),
+                      const Text('99 នាក់បានរៀន', style: TextStyle(fontSize: 12)),
                     ],
                   ),
                 ],
